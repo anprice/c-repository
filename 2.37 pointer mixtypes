@@ -1,0 +1,27 @@
+#include <iostream>
+
+struct antarctica_years_end
+{
+    int year;
+};
+
+int main() {
+
+    antarctica_years_end s01, s02, s03;                         //create variables of struct type
+    s01.year = 1998;                                            //Access and set members of the structs using membership operator
+    antarctica_years_end * pa = &s02;                           //Create a pointer to struct s02
+    pa->year = 1999;                                            //Use indirect membership operator to acces members
+    antarctica_years_end trio[3];                               //array of 3 structures
+    trio[0].year = 2003;                                        //Use membership operator to access members of an element in the array  
+    std::cout << trio->year << std::endl;                       //Pointer is pointing to the first address in the array, so we will get year of trio[0] by using the indirect membership operator
+    const antarctica_years_end * arp[3] = {&s01, &s02, &s03};   //Create an array of pointers
+    std::cout << arp[1]->year << std::endl;                     //Use indirect membership operator to get value stored in s02 year variable
+    const antarctica_years_end ** ppa = arp;                    //Create a pointer to the array arp
+    auto ppb = arp;                                             //c++11 auto type deduction
+    // or else use const antarctica_years_end ** ppb = arp;
+    std::cout << (*ppa)->year << std::endl;                     //Use indirect membership operator to get value of year in first struct in array
+    std::cout << (*(ppb+1))->year << std::endl;                 //Use indirect membership operator to get value of year in second struct in array
+
+    return 0;
+}
+
