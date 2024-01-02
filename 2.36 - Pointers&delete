@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+char * getname(void);                                               //function prototype
+
+int main() {
+
+    char * name;                                                    //create pointer but no storage at this time
+
+    name = getname();                                               //assign address of string to name
+    std::cout << name << " at " << (int *) name << "\n";            
+    delete [] name;                                                 //memory freed
+
+    name = getname();                                               //reuse freed memory
+    std::cout << name << " at " << (int *) name << "\n";
+    delete [] name;                                                 //free up memory again
+
+    return 0;
+}
+
+char * getname()                                                    //return pointer to new string
+{
+    char temp[80];                                                  //temporary storage
+    std::cout << "Enter last name: ";
+    std::cin >> temp;
+    char * pn = new char[strlen(temp) + 1];
+    strcpy(pn, temp);                                               //copy string into smaller space
+
+    return pn;                                                      //temp lost when function ends
+}
